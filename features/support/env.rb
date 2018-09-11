@@ -2,6 +2,8 @@ require 'capybara/cucumber'
 require 'selenium-webdriver'
 require 'rspec'
 require 'faker'
+require 'site_prism'
+require 'pry'
 
 Capybara.register_driver :selenium do |app|
     Capybara::Selenium::Driver.new(app, :broswer => :chrome)
