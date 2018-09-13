@@ -1,51 +1,54 @@
 class CadastroUsuario < SitePrism::Page
+  element :campo_nome_usuario, "div > #user_name"
+  element :campo_sobrenome_usuario, "#user_lastname"
+  element :campo_email_usuario, "#user_email"
+  element :campo_endereco_usuario, "#user_address"
+  element :campo_universidade_usuario, "#user_university"
+  element :campo_profissao_usuario, "#user_profile"
+  element :campo_genero_usuario, "#user_gender"
+  element :campo_idade_usuario, "#user_age"
+  element :botao_criar_usuario, "div > div.btn"
+  element :mensagem_sucesso_cadastro, "#notice"
+  element :mensagem_erro_cadastro, "#error_explanation"
 
-    element :sucesso_mensagem_cadastro, "#notice"
-    element :erro_mensagem_cadastro, "#error_explanation"
+  def cadastra_usuario(credencial)
+    credencial == "usuario valido" ? preencher_cadastro_valido(credencial) : preencher_cadastro_invalido(credencial)
+  end
 
-    def cadastro_usuario_valido
-        preencher_cadastro_valido
-        clicar_criar
-    end
+  def preencher_cadastro_invalido(credencial)
+    campo_nome_usuario.set data(credencial, "nome")
+    campo_sobrenome_usuario.set data(credencial, "sobrenome")
+    campo_profissao_usuario.set data(credencial, "profissao")
+    campo_idade_usuario.set data(credencial, "idade")
 
-    def preencher_cadastro_invalido(credencial)
-        find_field("user_name").set data(credencial, "nome")
-        find_field("user_lastname").set data(credencial, "sobrenome")
-        find_field("user_profile").set data(credencial, "profissao")
-        find_field("user_age").set data(credencial, "idade")
-        clicar_criar
-    end
+  end
 
-    def preencher_cadastro_valido
-        @name = Faker::HarryPotter.character
-        @name = @name.split(" ") if @name.length > 1
-        find_field("user_name").set(@name[0])
-        find_field("user_lastname").set(@name[1])
-        find_field("user_email").set(Faker::Internet.email)
-        find_field("user_address").set(Faker::Address.street_name)
-        find_field("user_university").set(Faker::University.name)
-        find_field("user_profile").set("Programmer")
-        find_field("user_gender").set(Faker::Gender.binary_type)
-        find_field("user_age").set(rand(80))
-    end
+  def preencher_cadastro_valido(credencial)
+    campo_nome_usuario.set data(credencial, "nome")
+    campo_sobrenome_usuario.set data(credencial, "sobrenome")
+    campo_email_usuario.set data(credencial, "email")
+    campo_endereco_usuario.set data(credencial, "endereco")
+    campo_profissao_usuario.set data(credencial, "profissao")
+    campo_genero_usuario.set data(credencial, "sexo")
+    campo_universidade_usuario.set data(credencial, "universidade")
+    campo_idade_usuario.set data(credencial, "idade")
+  end
 
-    def clicar_criar
-        click_on("Criar")
-    end
+  def clicar_criar
+    botao_criar_usuario.click
+  end
 
-    def cadastro_realizado_com_sucesso(mensagem)
-        has_sucesso_mensagem_cadastro?
-    end
+  def existe_mensagem_sucesso?
+    has_mensagem_sucesso_cadastro?
+  end
 
-    def existe_mensagem_erro?
-        has_erro_mensagem_cadastro?
-    end
+  def existe_mensagem_erro?
+    has_mensagem_erro_cadastro?
+  end
 
-    def data(credencial, key)
-        credencial = credencial.gsub(" ", "_")
-        credencial = CREDENCIAIS[credencial.to_sym]
-        return credencial = credencial[key.to_sym]
-    end
-
-
+  def data(credencial, key)
+    credencial = credencial.gsub(" ", "_")
+    credencial = CREDENCIAIS[credencial.to_sym]
+    return credencial = credencial[key.to_sym]
+  end
 end
