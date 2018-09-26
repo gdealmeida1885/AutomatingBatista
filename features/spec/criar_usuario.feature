@@ -3,6 +3,7 @@
 Funcionalidade: Criar Usuário
     Eu como visitante do site automacao batista
     Quero criar um novo usuario
+    Para que eu possa ter acesso às funcionalidades do site
 
     Contexto: Acessar página de cadastro de usuário
         Dado que eu estou no site automacaocombatista

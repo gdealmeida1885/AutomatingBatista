@@ -5,10 +5,10 @@ require 'faker'
 require 'site_prism'
 require 'pry'
 
-Capybara.register_driver :selenium do |app|
-    Capybara::Selenium::Driver.new(app, :broswer => :chrome)
-end
 
-Capybara.default_driver = :selenium_chrome
-Capybara.page.driver.browser.manage.window.maximize
-Capybara.default_max_wait_time = 10
+Capybara.configure do |c|
+  Capybara.default_driver = :selenium_chrome
+  Capybara.page.driver.browser.manage.window.maximize
+  Capybara.default_max_wait_time = 10
+  Capybara.app_host = "http://automacaocombatista.herokuapp.com"
+end
