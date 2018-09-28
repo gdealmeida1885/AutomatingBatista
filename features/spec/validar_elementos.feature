@@ -2,12 +2,12 @@
 
 Funcionalidade: Clicar Links
   Eu como um programador do site Automação Com Batista
-  Devo clicar  nos links
+  Devo clicar nos de validar elementos
   Para que eu possa validar os links do site
   
 
   Contexto: Acessar a página de links 
-    Dado que eu estou na página principal da Automação Com Batista
+    Dado que eu estou no site automacaocombatista
     Quando acesso a página de links
 
   @cenario1

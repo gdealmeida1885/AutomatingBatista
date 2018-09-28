@@ -20,7 +20,6 @@ class CadastroUsuario < SitePrism::Page
     campo_sobrenome_usuario.set data(credencial, "sobrenome")
     campo_profissao_usuario.set data(credencial, "profissao")
     campo_idade_usuario.set data(credencial, "idade")
-
   end
 
   def preencher_cadastro_valido(credencial)
@@ -49,6 +48,6 @@ class CadastroUsuario < SitePrism::Page
   def data(credencial, key)
     credencial = credencial.gsub(" ", "_")
     credencial = CREDENCIAIS[credencial.to_sym]
-    return credencial = credencial[key.to_sym]
+    return credencial[key.to_sym]
   end
 end
